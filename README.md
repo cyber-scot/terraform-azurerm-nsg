@@ -13,8 +13,8 @@ resource "azurerm_network_security_group" "nsg" {
 }
 
 resource "azurerm_network_interface_security_group_association" "this" {
-  count                     = var.associate_with_nic ? 0 : 1
-  network_interface_id      = var.subnet_id
+  count                     = var.associate_with_nic && var.nic_id != null ? 1 : 0
+  network_interface_id      = var.nic_id
   network_security_group_id = azurerm_network_security_group.nsg.id
 
   timeouts {
@@ -24,7 +24,7 @@ resource "azurerm_network_interface_security_group_association" "this" {
 }
 
 resource "azurerm_subnet_network_security_group_association" "this" {
-  count                     = var.associate_with_subnet ? 0 : 1
+  count                     = var.associate_with_subnet && var.subnet_id != null ? 1 : 0
   subnet_id                 = var.subnet_id
   network_security_group_id = azurerm_network_security_group.nsg.id
 
@@ -86,7 +86,7 @@ No modules.
 | <a name="input_nic_id"></a> [nic\_id](#input\_nic\_id) | The ID of a NIC if the association is triggered | `string` | `null` | no |
 | <a name="input_nsg_name"></a> [nsg\_name](#input\_nsg\_name) | The name of the resource to be created | `string` | n/a | yes |
 | <a name="input_rg_name"></a> [rg\_name](#input\_rg\_name) | The name of the resource group, this module does not create a resource group, it is expecting the value of a resource group already exists | `string` | n/a | yes |
-| <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id) | The ID of the subnet for the NSG to be attached to | `string` | n/a | yes |
+| <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id) | The ID of the subnet for the NSG to be attached to | `string` | `null` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | The tags assigned to the resource | `map(string)` | n/a | yes |
 
 ## Outputs
