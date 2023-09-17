@@ -34,20 +34,20 @@ module "nsg" {
   location = module.rg.rg_location
   tags     = module.rg.rg_tags
 
-  nsg_name  = "nsg-${var.short}-${var.loc}-${var.env}-01"
+  nsg_name              = "nsg-${var.short}-${var.loc}-${var.env}-01"
   associate_with_subnet = true
-  subnet_id = element(values(module.network.subnets_ids), 0)
+  subnet_id             = element(values(module.network.subnets_ids), 0)
   custom_nsg_rules = {
     "AllowVnetInbound" = {
-      priority                    = 100
-      direction                   = "Inbound"
-      access                      = "Allow"
-      protocol                    = "Tcp"
-      source_port_range           = "*"
-      destination_port_range      = "*"
-      source_address_prefix       = "VirtualNetwork"
-      destination_address_prefix  = "VirtualNetwork"
-  }
+      priority                   = 100
+      direction                  = "Inbound"
+      access                     = "Allow"
+      protocol                   = "Tcp"
+      source_port_range          = "*"
+      destination_port_range     = "*"
+      source_address_prefix      = "VirtualNetwork"
+      destination_address_prefix = "VirtualNetwork"
+    }
   }
 }
 ```
