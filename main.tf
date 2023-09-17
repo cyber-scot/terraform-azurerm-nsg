@@ -11,8 +11,8 @@ resource "azurerm_network_security_group" "nsg" {
 }
 
 resource "azurerm_network_interface_security_group_association" "this" {
-  count                     = var.associate_with_nic ? 0 : 1
-  network_interface_id      = var.subnet_id
+  count                     = var.associate_with_nic && var.nic_id != null ? 1 : 0
+  network_interface_id      = var.nic_id
   network_security_group_id = azurerm_network_security_group.nsg.id
 
   timeouts {
@@ -22,7 +22,7 @@ resource "azurerm_network_interface_security_group_association" "this" {
 }
 
 resource "azurerm_subnet_network_security_group_association" "this" {
-  count                     = var.associate_with_subnet ? 0 : 1
+  count                     = var.associate_with_subnet && var.subnet_id != null ? 1 : 0
   subnet_id                 = var.subnet_id
   network_security_group_id = azurerm_network_security_group.nsg.id
 

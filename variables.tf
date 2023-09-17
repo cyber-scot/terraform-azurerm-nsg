@@ -55,6 +55,7 @@ variable "rg_name" {
 variable "subnet_id" {
   description = "The ID of the subnet for the NSG to be attached to"
   type        = string
+  default     = null
 }
 
 variable "tags" {

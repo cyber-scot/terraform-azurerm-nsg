@@ -28,7 +28,7 @@ module "network" {
 }
 
 module "nsg" {
-  source = "../../"
+  source = "cyber-scot/nsg/azurerm"
 
   rg_name  = module.rg.rg_name
   location = module.rg.rg_location
@@ -59,16 +59,16 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
-| <a name="provider_external"></a> [external](#provider\_external) | n/a |
-| <a name="provider_http"></a> [http](#provider\_http) | n/a |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.73.0 |
+| <a name="provider_external"></a> [external](#provider\_external) | 2.3.1 |
+| <a name="provider_http"></a> [http](#provider\_http) | 3.4.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_network"></a> [network](#module\_network) | cyber-scot/network/azurerm | n/a |
-| <a name="module_nsg"></a> [nsg](#module\_nsg) | ../../ | n/a |
+| <a name="module_nsg"></a> [nsg](#module\_nsg) | cyber-scot/nsg/azurerm | n/a |
 | <a name="module_rg"></a> [rg](#module\_rg) | cyber-scot/rg/azurerm | n/a |
 
 ## Resources
