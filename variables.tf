@@ -1,22 +1,34 @@
-variable "custom_nsg_rules" {
-  description = "Custom NSG rules to apply if apply_standard_rules is set to false."
-  type = map(object({
-    priority                    = number
-    direction                   = string
-    access                      = string
-    protocol                    = string
-    source_port_range           = string
-    destination_port_range      = string
-    source_address_prefix       = string
-    destination_address_prefix  = string
-  }))
-  default = {}
-}
-
 variable "apply_standard_rules" {
   description = "Whether to apply the standard NSG rules or not."
   type        = bool
   default     = true
+}
+
+variable "associate_with_nic" {
+  type        = bool
+  description = "Whether the NSG should be associated with a nic"
+  default     = false
+}
+
+variable "associate_with_subnet" {
+  type        = bool
+  description = "Whether the NSG should be associated with a subnet"
+  default     = false
+}
+
+variable "custom_nsg_rules" {
+  description = "Custom NSG rules to apply if apply_standard_rules is set to false."
+  type = map(object({
+    priority                   = number
+    direction                  = string
+    access                     = string
+    protocol                   = string
+    source_port_range          = string
+    destination_port_range     = string
+    source_address_prefix      = string
+    destination_address_prefix = string
+  }))
+  default = {}
 }
 
 variable "location" {
@@ -24,27 +36,15 @@ variable "location" {
   type        = string
 }
 
+variable "nic_id" {
+  type        = string
+  description = "The ID of a NIC if the association is triggered"
+  default     = null
+}
+
 variable "nsg_name" {
   description = "The name of the resource to be created"
   type        = string
-}
-
-variable "associate_with_subnet" {
-  type = bool
-  description = "Whether the NSG should be associated with a subnet"
-  default = false
-}
-
-variable "associate_with_nic" {
-  type = bool
-  description = "Whether the NSG should be associated with a nic"
-  default = false
-}
-
-variable "nic_id" {
-  type = string
-  description = "The ID of a NIC if the association is triggered"
-  default = null
 }
 
 variable "rg_name" {

@@ -22,9 +22,9 @@ resource "azurerm_network_interface_security_group_association" "this" {
 }
 
 resource "azurerm_subnet_network_security_group_association" "this" {
-  count                      = var.associate_with_subnet ? 0 : 1
-  subnet_id                  = var.subnet_id
-  network_security_group_id  = azurerm_network_security_group.nsg.id
+  count                     = var.associate_with_subnet ? 0 : 1
+  subnet_id                 = var.subnet_id
+  network_security_group_id = azurerm_network_security_group.nsg.id
 
   timeouts {
     create = "5m"
